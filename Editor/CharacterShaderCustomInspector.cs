@@ -253,7 +253,7 @@ namespace IsuzuShader.Editor
 
                 GUILayout.Space(5);
 
-                if (GUILayout.Button("Chaeck Version"))
+                if (GUILayout.Button("Check Version"))
                 {
                     this.ChaeckForUpdate();
                 }
@@ -269,9 +269,9 @@ namespace IsuzuShader.Editor
             var stayVersionText = "Already updated!\n" + this.currentVersion;
             if (!this.controller.IsNewVersionAvailable())
             {
-                EditorUtility.DisplayDialog("Chaeck Version", stayVersionText, "OK");
+                EditorUtility.DisplayDialog("Check Version", stayVersionText, "OK");
             }
-            else if (EditorUtility.DisplayDialog("Chaeck Version", newVersionText, "OK", "Cancel"))
+            else if (EditorUtility.DisplayDialog("Check Version", newVersionText, "OK", "Cancel"))
             {
                 System.Diagnostics.Process.Start("https://github.com/isuzu-shiranui/Isuzu-s-shaders/releases");
             }
