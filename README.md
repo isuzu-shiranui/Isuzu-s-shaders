@@ -1,5 +1,7 @@
 # Isuzu Shaders
 
+<img src="https://github.com/isuzu-shiranui/Isuzu-s-shaders/blob/master/isuzushaders.png" width="480px">
+
 ## 概要
 
 アバターに適用することを目的としたトゥーンシェーダー。
