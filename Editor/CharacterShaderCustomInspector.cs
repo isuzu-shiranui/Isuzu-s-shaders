@@ -10,8 +10,7 @@ namespace IsuzuShader.Editor
     ///<inheritdoc />
     public class CharacterShaderCustomInspector : ShaderGUI
     {
-        private const string Version = "2.0.0.0";
-
+        #region Fields
         private bool renderingFold = false;
         private bool textureFold = false;
         private bool matcapFold = false;
@@ -26,6 +25,21 @@ namespace IsuzuShader.Editor
         private bool distortionFold = false;
         private bool reflectionFold = false;
         private bool tesserationFold = false;
+        private bool otherFold = false;
+
+        private readonly string currentVersion;
+        private readonly string remoteVersion;
+
+        private readonly DataController controller;
+        #endregion
+
+        public CharacterShaderCustomInspector()
+        {
+            this.controller = new DataController();
+            this.otherFold = this.controller.IsNewVersionAvailable();
+            this.currentVersion = this.controller.GetCurrentVersion();
+            this.remoteVersion = this.controller.GetRemoteVersion();
+        }
 
         ///<inheritdoc />
         public override void OnGUI(MaterialEditor materialEditor, MaterialProperty[] properties)
@@ -231,7 +245,36 @@ namespace IsuzuShader.Editor
 #endif
                     materialEditor.LightmapEmissionProperty();
                 });
+
+            UiUtils.PropertyFoldGroup("Other", ref this.otherFold, () =>
+            {
+                EditorGUILayout.LabelField("Current Version : ", this.currentVersion);
+                EditorGUILayout.LabelField("Latest  Version : ", this.remoteVersion);
+
+                GUILayout.Space(5);
+
+                if (GUILayout.Button("Chaeck Version"))
+                {
+                    this.ChaeckForUpdate();
+                }
+            });
+
             EditorGUI.EndChangeCheck();
+        }
+
+        [InitializeOnLoadMethod]
+        private void ChaeckForUpdate()
+        {
+            var newVersionText = "New version Available!\n" + this.currentVersion + " → " + this.remoteVersion;
+            var stayVersionText = "Already updated!\n" + this.currentVersion;
+            if (!this.controller.IsNewVersionAvailable())
+            {
+                EditorUtility.DisplayDialog("Chaeck Version", stayVersionText, "OK");
+            }
+            else if (EditorUtility.DisplayDialog("Chaeck Version", newVersionText, "OK", "Cancel"))
+            {
+                System.Diagnostics.Process.Start("https://github.com/isuzu-shiranui/Isuzu-s-shaders/releases");
+            }
         }
 
         private static void LoadMaterialProperties(Material material)

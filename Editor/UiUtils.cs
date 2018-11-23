@@ -4,8 +4,12 @@ using UnityEngine;
 
 namespace IsuzuShader.Editor
 {
+    /// <summary>
+    /// UIに関するUtilityクラス
+    /// </summary>
     public static class UiUtils
     {
+        #region PropertyNames
         public const string CullMode = "_CullMode";
         public const string Texture = "_Texture";
         public const string ToonRamp = "_ToonRamp";
@@ -69,7 +73,14 @@ namespace IsuzuShader.Editor
         public const string TessValue = "_TessValue";
         public const string TessMin = "_TessMin";
         public const string TessMax = "_TessMax";
+        #endregion
 
+        /// <summary>
+        /// タイトル付きのカスタム折り畳みグループUI
+        /// </summary>
+        /// <param name="title">タイトル</param>
+        /// <param name="foldField">たたまれているか</param>
+        /// <param name="materialPropertyAction">グループ内のコンテンツ</param>
         public static void PropertyFoldGroup(string title, ref bool foldField, Action materialPropertyAction)
         {
             var style = new GUIStyle("ShurikenModuleTitle")
