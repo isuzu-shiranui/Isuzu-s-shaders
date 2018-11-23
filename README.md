@@ -1,6 +1,5 @@
 # Isuzu Shaders
 
-![](https://github.com/isuzu-shiranui/Isuzu-s-shaders/blob/master/isuzushaders.png)
 <img src="https://github.com/isuzu-shiranui/Isuzu-s-shaders/blob/master/isuzushaders.png" width="480px">
 
 ## 概要
