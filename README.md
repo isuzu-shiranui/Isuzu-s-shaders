@@ -23,7 +23,7 @@
 
 ### マテリアル設定画面
 
-![]("633ad8a80923bbd656e21331f6a0ddb1.png")
+![](https://github.com/isuzu-shiranui/Isuzu-s-shaders/blob/master/633ad8a80923bbd656e21331f6a0ddb1.png)
 
 * 本シェーダー間の値のコピー＆ペーストサポート
 * 関連する設定項目ごとに折り畳み
