@@ -1,4 +1,4 @@
-# Isuzu's Shaders
+# Isuzu Shaders
 
 ## 概要
 
