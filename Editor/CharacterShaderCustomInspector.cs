@@ -37,8 +37,8 @@ namespace IsuzuShader.Editor
         {
             this.controller = new DataController();
             this.otherFold = this.controller.IsNewVersionAvailable();
-            this.currentVersion = this.controller.GetCurrentVersion();
-            this.remoteVersion = this.controller.GetRemoteVersion();
+            this.currentVersion = DataController.Instance.CurrentVersion;
+            this.remoteVersion = DataController.Instance.LatestVersion;
         }
 
         ///<inheritdoc />

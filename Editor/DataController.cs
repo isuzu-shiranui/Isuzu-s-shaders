@@ -10,7 +10,31 @@ namespace IsuzuShader.Editor
 {
     public class DataController
     {
-        public string GetCurrentVersion()
+#pragma warning disable IDE1006 // 命名スタイル
+        private static DataController instance;
+#pragma warning restore IDE1006 // 命名スタイル
+
+        public static DataController Instance
+        {
+            get
+            {
+                if (instance != null) return instance;
+                instance = new DataController();
+                return instance;
+            }
+        }
+
+        public string CurrentVersion { get; set; }
+
+        public string LatestVersion { get; set; }
+
+        public DataController()
+        {
+            this.CurrentVersion = this.GetCurrentVersion();
+            this.LatestVersion = this.GetRemoteVersion();
+        }
+
+        private string GetCurrentVersion()
         {
             var currentVersion = string.Empty;
             var versionTextPath = Application.dataPath + "/Isuzu's shaders/Character/version.txt";
@@ -27,11 +51,22 @@ namespace IsuzuShader.Editor
             var url = "https://github.com/isuzu-shiranui/Isuzu-s-shaders/blob/master/Character/version.txt";
             using (var request = UnityWebRequest.Get(url))
             {
+#if UNITY_2017
                 yield return request.SendWebRequest();
+#else
+                yield return request.Send();
+#endif
+
 
                 while (!request.isDone) yield return 0;
 
-                if (request.isHttpError || request.isNetworkError) Debug.LogError(request.error);
+                if (
+#if UNITY_2017
+                    request.isHttpError || request.isNetworkError
+#else
+                    request.responseCode == 400 || request.responseCode == 500
+#endif
+                     ) Debug.LogError(request.error);
                 var regex = new Regex("(?<=td id=\"LC1\".*?>).*?(?=<)");
                 var match = regex.Match(request.downloadHandler.text);
 
@@ -41,7 +76,7 @@ namespace IsuzuShader.Editor
             }           
         }
 
-        public string GetRemoteVersion()
+        private string GetRemoteVersion()
         {
             var remoteVersion = string.Empty;
             var enumerator = this.GetRemoteVersion(x => remoteVersion = x);
@@ -53,12 +88,9 @@ namespace IsuzuShader.Editor
 
         public bool IsNewVersionAvailable()
         {
-            var currentVersion = this.GetCurrentVersion();
-            var remoteVersion = this.GetRemoteVersion();
+            if (string.IsNullOrEmpty(this.LatestVersion) || string.IsNullOrEmpty(this.CurrentVersion)) return false;
 
-            if (string.IsNullOrEmpty(remoteVersion)) return false;
-
-            return new Version(currentVersion) < new Version(remoteVersion);
+            return new Version(this.CurrentVersion) < new Version(this.LatestVersion);
         }
     }
 }
