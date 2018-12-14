@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading;
 using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 namespace IsuzuShader.Editor
@@ -35,10 +36,10 @@ namespace IsuzuShader.Editor
 
         public CharacterShaderCustomInspector()
         {
-            this.controller = new DataController();
-            this.otherFold = this.controller.IsNewVersionAvailable();
-            this.currentVersion = DataController.Instance.CurrentVersion;
-            this.remoteVersion = DataController.Instance.LatestVersion;
+            //this.controller = new DataController();
+            //this.otherFold = this.controller.IsNewVersionAvailable();
+            //this.currentVersion = DataController.Instance.CurrentVersion;
+            //this.remoteVersion = DataController.Instance.LatestVersion;
         }
 
         ///<inheritdoc />
@@ -246,35 +247,30 @@ namespace IsuzuShader.Editor
                     materialEditor.LightmapEmissionProperty();
                 });
 
-            UiUtils.PropertyFoldGroup("Other", ref this.otherFold, () =>
-            {
-                EditorGUILayout.LabelField("Current Version : ", this.currentVersion);
-                EditorGUILayout.LabelField("Latest  Version : ", this.remoteVersion);
+            //UiUtils.PropertyFoldGroup("Other", ref this.otherFold, () =>
+            //{
+            //    EditorGUILayout.LabelField("Current Version : ", this.currentVersion);
+            //    EditorGUILayout.LabelField("Latest  Version : ", this.remoteVersion);
 
-                GUILayout.Space(5);
+            //    GUILayout.Space(5);
 
-                if (GUILayout.Button("Check Version"))
-                {
-                    this.ChaeckForUpdate();
-                }
-            });
+            //    if (GUILayout.Button("Check Version"))
+            //    {
+            //        var newVersionText = "New version Available!\n" + this.currentVersion + " → " + this.remoteVersion;
+            //        var stayVersionText = "Already updated!\n" + this.currentVersion;
+
+            //        if (!this.controller.IsNewVersionAvailable())
+            //        {
+            //            EditorUtility.DisplayDialog("Check Version", stayVersionText, "OK");
+            //        }
+            //        else if (EditorUtility.DisplayDialog("Check Version", newVersionText, "OK", "Cancel"))
+            //        {
+            //            System.Diagnostics.Process.Start("https://github.com/isuzu-shiranui/Isuzu-s-shaders/releases");
+            //        }
+            //    }
+            //});
 
             EditorGUI.EndChangeCheck();
-        }
-
-        [InitializeOnLoadMethod]
-        private void ChaeckForUpdate()
-        {
-            var newVersionText = "New version Available!\n" + this.currentVersion + " → " + this.remoteVersion;
-            var stayVersionText = "Already updated!\n" + this.currentVersion;
-            if (!this.controller.IsNewVersionAvailable())
-            {
-                EditorUtility.DisplayDialog("Check Version", stayVersionText, "OK");
-            }
-            else if (EditorUtility.DisplayDialog("Check Version", newVersionText, "OK", "Cancel"))
-            {
-                System.Diagnostics.Process.Start("https://github.com/isuzu-shiranui/Isuzu-s-shaders/releases");
-            }
         }
 
         private static void LoadMaterialProperties(Material material)
