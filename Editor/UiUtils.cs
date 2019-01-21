@@ -43,7 +43,7 @@ namespace IsuzuShader.Editor
         public const string OutlineTint = "_OutlineTint";
         public const string OutlineWidth = "_OutlineWidth";
         public const string SpecularMap = "_SpecularMap";
-        public const string Specular = "_Specular";
+        public const string Specular = "_SpecularTint";
         public const string OcculusionMap = "_OcculusionMap";
         public const string OcculusionStrength = "_OcculusionStrength";
         public const string Reference = "_Reference";
@@ -73,6 +73,10 @@ namespace IsuzuShader.Editor
         public const string TessValue = "_TessValue";
         public const string TessMin = "_TessMin";
         public const string TessMax = "_TessMax";
+        public const string AnisotropyX = "_AnisotropyX";
+        public const string AnisotropyY = "_AnisotropyY";
+        public const string StaticHighLights = "_StaticHighLights";
+
         #endregion
 
         /// <summary>
