@@ -76,6 +76,11 @@ namespace IsuzuShader.Editor
         public const string AnisotropyX = "_AnisotropyX";
         public const string AnisotropyY = "_AnisotropyY";
         public const string StaticHighLights = "_StaticHighLights";
+        public const string SSSMap = "_SSSMap";
+        public const string SSSColor = "_SSSColor";
+        public const string SSSPower = "_SSSPower";
+        public const string SSSScale = "_SSSScale";
+        public const string SubsurfaceDistortion = "_SubsurfaceDistortion";
 
         #endregion
 

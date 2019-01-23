@@ -27,6 +27,7 @@ namespace IsuzuShader.Editor
         private bool tesserationFold = false;
         private bool otherFold = false;
         private bool anisotropicFold = false;
+        private bool sssFold = false;
 
         private readonly string currentVersion;
         private readonly string remoteVersion;
@@ -194,6 +195,17 @@ namespace IsuzuShader.Editor
                         FindProperty(UiUtils.OcculusionMap, properties));
                     materialEditor.ShaderProperty(FindProperty(UiUtils.OcculusionStrength, properties),
                         "Occulusion Strength");
+                });
+
+            if (properties.Any(x => x.name == UiUtils.SSSMap))
+                UiUtils.PropertyFoldGroup("Subsurface Scattering", ref this.sssFold, () =>
+                {
+                    materialEditor.TexturePropertySingleLine(new GUIContent("SSS Map"),
+                        FindProperty(UiUtils.SSSMap, properties));
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.SSSColor, properties), "SSS Color");
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.SSSScale, properties), "SSS Scale");
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.SSSPower, properties), "SSS Power");
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.SubsurfaceDistortion, properties), "Subsurface Distortion");
                 });
 
             if (properties.Any(x => x.name == UiUtils.Distortion))

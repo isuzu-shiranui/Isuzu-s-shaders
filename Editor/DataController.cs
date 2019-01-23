@@ -2,7 +2,6 @@
 using System.Collections;
 using System.IO;
 using System.Text.RegularExpressions;
-using UnityEditor.Callbacks;
 using UnityEngine;
 using UnityEngine.Networking;
 using Version = System.Version;
@@ -47,12 +46,12 @@ namespace IsuzuShader.Editor
             return currentVersion;
         }
 
-        private static IEnumerator GetRemoteVersion(Action<string> requestFinishedAction)
+        private IEnumerator GetRemoteVersion(Action<string> requestFinishedAction)
         {
             var url = "https://github.com/isuzu-shiranui/Isuzu-s-shaders/blob/master/Character/version.txt";
             using (var request = UnityWebRequest.Get(url))
             {
-#if UNITY_2017_1_OR_NEWER
+#if UNITY_2017
                 yield return request.SendWebRequest();
 #else
                 yield return request.Send();
@@ -62,7 +61,7 @@ namespace IsuzuShader.Editor
                 while (!request.isDone) yield return 0;
 
                 if (
-#if UNITY_2017_1_OR_NEWER
+#if UNITY_2017
                     request.isHttpError || request.isNetworkError
 #else
                     request.responseCode == 400 || request.responseCode == 500
@@ -74,15 +73,13 @@ namespace IsuzuShader.Editor
                 if(!match.Success) Debug.LogError("Not Found");
 
                 requestFinishedAction(match.ToString());
-            }
+            }           
         }
 
-        [DidReloadScripts(0)]
         private string GetRemoteVersion()
         {
-            if (!string.IsNullOrEmpty(this.LatestVersion)) return this.LatestVersion;
             var remoteVersion = string.Empty;
-            var enumerator = GetRemoteVersion(x => remoteVersion = x);
+            var enumerator = this.GetRemoteVersion(x => remoteVersion = x);
 
             if (enumerator != null) while (enumerator.MoveNext()) { }
 
