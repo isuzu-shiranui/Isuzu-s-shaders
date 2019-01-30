@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading;
+using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
 
@@ -28,6 +30,9 @@ namespace IsuzuShader.Editor
         private bool otherFold = false;
         private bool anisotropicFold = false;
         private bool sssFold = false;
+        private bool transparencyFold = false;
+
+        private bool useLim = false;
 
         private readonly string currentVersion;
         private readonly string remoteVersion;
@@ -68,6 +73,20 @@ namespace IsuzuShader.Editor
                     }
                 }
 
+                using (new GUILayout.HorizontalScope())
+                {
+                    if (GUILayout.Button("Export Template"))
+                    {
+                        SaveTemplateData(material);
+                    }
+
+                    if (GUILayout.Button("Import Template"))
+                    {
+                        LoadTemplateData(material);
+                        materialEditor.PropertiesChanged();
+                    }
+                }
+
                 GUILayout.Space(5);
             }
 
@@ -81,7 +100,7 @@ namespace IsuzuShader.Editor
                     materialEditor.TexturePropertySingleLine(new GUIContent("Texture"),
                         FindProperty(UiUtils.Texture, properties));
                     materialEditor.TexturePropertySingleLine(new GUIContent("Toon Ramp"),
-                        FindProperty(UiUtils.ToonRamp, properties));
+                         FindProperty(UiUtils.ToonRamp, properties));
                     materialEditor.ShaderProperty(FindProperty(UiUtils.BaseColor, properties), "Base Color");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.BaseScrollRotate, properties),
                         "Base Scroll Rotate");
@@ -138,12 +157,14 @@ namespace IsuzuShader.Editor
                 });
 
             if (properties.Any(x => x.name == UiUtils.RimColor))
-                UiUtils.PropertyFoldGroup("Rim Light", ref this.rimFold, () =>
+                UiUtils.PropertyFoldGroup("Rim Light", ref this.rimFold,() =>
                 {
                     materialEditor.ShaderProperty(FindProperty(UiUtils.RimColor, properties), "Rim Color");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.RimPower, properties), "Rim Power");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.RimOffset, properties), "Rim Offset");
-                    materialEditor.ShaderProperty(FindProperty(UiUtils.UseRim, properties), "Use Rim");
+                    var property = FindProperty(UiUtils.UseRim, properties);
+                    useLim = property.floatValue > 0;
+                    materialEditor.ShaderProperty(property, "Use Rim");
                 });
 
             if (properties.Any(x => x.name == UiUtils.Normal))
@@ -174,11 +195,22 @@ namespace IsuzuShader.Editor
                         //"Indirect Specular Contribution");
                 });
 
+            if (properties.Any(x => x.name == UiUtils.MaskClipValue))
+                UiUtils.PropertyFoldGroup("Transparency", ref this.transparencyFold, () =>
+                {
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.MaskClipValue, properties), "Mask Clip Value");
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.Opacity, properties), "Opacity");
+                });
+
             if (properties.Any(x => x.name == UiUtils.AnisotropyX))
                 UiUtils.PropertyFoldGroup("Anisotropic", ref this.anisotropicFold, () =>
                 {
                     materialEditor.ShaderProperty(FindProperty(UiUtils.AnisotropyX, properties), "Anisotropy X");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.AnisotropyY, properties), "Anisotropy Y");
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.AnisotropyX2, properties), "Anisotropy X2");
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.AnisotropyY2, properties), "Anisotropy Y2");
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.Layer2BlendWeight, properties), "Layer2 Blend Weight");
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.UseAnisotropy, properties), "Use Anisotropic");
                 });
 
             if (properties.Any(x => x.name == UiUtils.OutlineTint))
@@ -206,6 +238,7 @@ namespace IsuzuShader.Editor
                     materialEditor.ShaderProperty(FindProperty(UiUtils.SSSScale, properties), "SSS Scale");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.SSSPower, properties), "SSS Power");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.SubsurfaceDistortion, properties), "Subsurface Distortion");
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.UseSSS, properties), "Use SSS");
                 });
 
             if (properties.Any(x => x.name == UiUtils.Distortion))
@@ -418,6 +451,151 @@ namespace IsuzuShader.Editor
 
             EditorPrefs.SetString("67304ff086a54a09817cfd4e8a54aeda", data);
             Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
+        }
+
+         private static void SaveTemplateData(Material material)
+         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            var shader = material.shader;
+            var propertyCount = ShaderUtil.GetPropertyCount(shader);
+            var data = string.Empty;
+
+            for (var i = 0; i < propertyCount; i++)
+            {
+                var type = ShaderUtil.GetPropertyType(shader, i);
+                var name = ShaderUtil.GetPropertyName(shader, i);
+                var value = string.Empty;
+                switch (type)
+                {
+                    case ShaderUtil.ShaderPropertyType.Color:
+                        var color = material.GetColor(name);
+                        value = string.Format("{0},{1},{2},{3}", color.r, color.g, color.b, color.a);
+                        break;
+                    case ShaderUtil.ShaderPropertyType.Vector:
+                        var vector = material.GetVector(name);
+                        value = string.Format("{0},{1},{2},{3}", vector.x, vector.y, vector.z, vector.w);
+                        break;
+                    case ShaderUtil.ShaderPropertyType.Float:
+                        value = material.GetFloat(name).ToString();
+                        break;
+                    case ShaderUtil.ShaderPropertyType.Range:
+                        value = material.GetFloat(name).ToString();
+                        break;
+                    case ShaderUtil.ShaderPropertyType.TexEnv:
+                        var texture = material.GetTexture(name);
+                        value = AssetDatabase.GetAssetPath(texture);
+                        var offset = material.GetTextureOffset(name);
+                        var scale = material.GetTextureScale(name);
+                        value += string.Format(",{0},{1},{2},{3}", offset.x, offset.y, scale.x, scale.y);
+                        break;
+                }
+
+                data += string.Format("{0}:{1}:{2}", name, type, value);
+
+
+                if (i < propertyCount - 1) data += ";";
+            }
+
+            EditorPrefs.SetString("67304ff086a54a09817cfd4e8a54aeda", data);
+
+            var filePath = EditorUtility.SaveFilePanel("Create New Isuzu Shader Template", Application.dataPath, "New IsuzuShaderTemplate", "shadertemp");
+
+            if (string.IsNullOrEmpty(filePath)) return;
+
+            using (var writer = new StreamWriter(filePath, false))
+            {
+                writer.Write(data);
+                writer.Flush();
+                writer.Close();
+            }
+
+             AssetDatabase.SaveAssets();
+             AssetDatabase.Refresh();
+
+            Thread.CurrentThread.CurrentCulture = Thread.CurrentThread.CurrentUICulture;
+         }
+
+        private static void LoadTemplateData(Material material)
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+
+            var filePath = EditorUtility.OpenFilePanel("Select Isuzu Shader Template", Application.dataPath, "shadertemp");
+            if (string.IsNullOrEmpty(filePath)) return;
+
+            var data = string.Empty;
+            using (var sr = new StreamReader(filePath))
+            {
+                data = sr.ReadToEnd();
+                sr.Close();
+            }
+
+            if (string.IsNullOrEmpty(data)) return;
+
+            var properties = data.Split(';');
+
+            try
+            {
+                for (var i = 0; i < properties.Length; i++)
+                {
+                    var values = properties[i].Split(':');
+                    if (values.Length != 3) return;
+                    if (!material.HasProperty(values[0])) return;
+
+                    var type = (ShaderUtil.ShaderPropertyType)Enum.Parse(typeof(ShaderUtil.ShaderPropertyType), values[1]);
+
+                    switch (type)
+                    {
+                        case ShaderUtil.ShaderPropertyType.Color:
+                            var colors = values[2].Split(',');
+                            if (colors.Length != 4) break;
+                            material.SetColor(values[0], new Color
+                            (
+                                Convert.ToSingle(colors[0]),
+                                Convert.ToSingle(colors[1]),
+                                Convert.ToSingle(colors[2]),
+                                Convert.ToSingle(colors[3])
+                            ));
+                            break;
+                        case ShaderUtil.ShaderPropertyType.Vector:
+                            var vectors = values[2].Split(',');
+                            if (vectors.Length != 4) break;
+                            material.SetVector(values[0], new Color
+                            (
+                                Convert.ToSingle(vectors[0]),
+                                Convert.ToSingle(vectors[1]),
+                                Convert.ToSingle(vectors[2]),
+                                Convert.ToSingle(vectors[3])
+                            ));
+                            break;
+                        case ShaderUtil.ShaderPropertyType.Float:
+                            material.SetFloat(values[0], Convert.ToSingle(values[2]));
+                            break;
+                        case ShaderUtil.ShaderPropertyType.Range:
+                            material.SetFloat(values[0], Convert.ToSingle(values[2]));
+                            break;
+                        case ShaderUtil.ShaderPropertyType.TexEnv:
+                            var testures = values[2].Split(',');
+                            if (testures.Length != 5) break;
+                            material.SetTexture(values[0], AssetDatabase.LoadAssetAtPath<Texture>(testures[0]));
+                            material.SetTextureOffset(values[0], new Vector2
+                            (
+                                Convert.ToSingle(testures[1]),
+                                Convert.ToSingle(testures[2])
+                            ));
+                            material.SetTextureScale(values[0], new Vector2
+                            (
+                                Convert.ToSingle(testures[3]),
+                                Convert.ToSingle(testures[4])
+                            ));
+                            break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CurrentUICulture;
         }
     }
 }

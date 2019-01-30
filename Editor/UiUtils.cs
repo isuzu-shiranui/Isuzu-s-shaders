@@ -75,12 +75,19 @@ namespace IsuzuShader.Editor
         public const string TessMax = "_TessMax";
         public const string AnisotropyX = "_AnisotropyX";
         public const string AnisotropyY = "_AnisotropyY";
+        public const string AnisotropyX2 = "_AnisotropyX2";
+        public const string AnisotropyY2 = "_AnisotropyY2";
+        public const string UseAnisotropy = "_UseAnisotropic";
+        public const string Layer2BlendWeight = "_Layer2BlendWeight";
         public const string StaticHighLights = "_StaticHighLights";
         public const string SSSMap = "_SSSMap";
         public const string SSSColor = "_SSSColor";
         public const string SSSPower = "_SSSPower";
         public const string SSSScale = "_SSSScale";
+        public const string UseSSS = "_UseSSS";
         public const string SubsurfaceDistortion = "_SubsurfaceDistortion";
+        public const string MaskClipValue = "_MaskClipValue";
+        public const string Opacity = "_Opacity";
 
         #endregion
 
@@ -119,6 +126,57 @@ namespace IsuzuShader.Editor
             }
 
             if (foldField)
+                using (new GUILayout.VerticalScope(GUI.skin.box))
+                    materialPropertyAction();
+        }
+
+        /// <summary>
+        /// タイトル付きのカスタム折り畳みグループUI
+        /// </summary>
+        /// <param name="title">タイトル</param>
+        /// <param name="foldField">たたまれているか</param>
+        /// <param name="materialPropertyAction">グループ内のコンテンツ</param>
+        public static void PropertyBooleanFoldGroup(string title, ref bool foldField, ref bool isChaeck, Action materialPropertyAction)
+        {
+            var style = new GUIStyle("ShurikenModuleTitle")
+            {
+                font = new GUIStyle(EditorStyles.label).font,
+                border = new RectOffset(15, 7, 4, 4),
+                fixedHeight = 22,
+                contentOffset = new Vector2(32f, -2f),
+                fontStyle = FontStyle.Bold
+            };
+
+            var rect = GUILayoutUtility.GetRect(16f, 22f, style);
+            GUI.Box(rect, title, style);
+
+            var e = Event.current;
+
+            var foldRect = new Rect(rect.x + 4f, rect.y + 2f, 13f, 13f);
+            var toggleRect = new Rect(rect.x + 16f, rect.y + 2f, 13f, 13f);
+            if (e.type == EventType.Repaint)
+            {
+                EditorStyles.toggle.Draw(toggleRect, false, false, isChaeck, false);
+                EditorStyles.foldout.Draw(foldRect, false, false, foldField, false);
+            }
+
+            if (e.type == EventType.MouseDown)
+            {
+
+                if(foldRect.Contains(e.mousePosition))
+                {
+                    foldField = !foldField;
+                    e.Use();
+                }
+
+                if(toggleRect.Contains(e.mousePosition))
+                {
+                    isChaeck = !isChaeck;
+                    e.Use();
+                }
+            }
+
+            if (foldField )
                 using (new GUILayout.VerticalScope(GUI.skin.box))
                     materialPropertyAction();
         }
