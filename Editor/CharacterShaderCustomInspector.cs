@@ -157,7 +157,7 @@ namespace IsuzuShader.Editor
                 });
 
             if (properties.Any(x => x.name == UiUtils.RimColor))
-                UiUtils.PropertyFoldGroup("Rim Light", ref this.rimFold,() =>
+                UiUtils.PropertyFoldGroup("Rim Light", ref this.rimFold, () =>
                 {
                     materialEditor.ShaderProperty(FindProperty(UiUtils.RimColor, properties), "Rim Color");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.RimPower, properties), "Rim Power");
@@ -232,11 +232,18 @@ namespace IsuzuShader.Editor
             if (properties.Any(x => x.name == UiUtils.SSSMap))
                 UiUtils.PropertyFoldGroup("Subsurface Scattering", ref this.sssFold, () =>
                 {
-                    materialEditor.TexturePropertySingleLine(new GUIContent("SSS Map"),
-                        FindProperty(UiUtils.SSSMap, properties));
+                    var type = FindProperty(UiUtils.SSSType, properties);
+                    var visible = type.floatValue == 1;
+
+                    materialEditor.ShaderProperty(type, "SSS Type");
+                    materialEditor.TexturePropertySingleLine(new GUIContent("SSS Map"), FindProperty(UiUtils.SSSMap, properties));
+                    if(visible) materialEditor.ShaderProperty(FindProperty(UiUtils.SSSMultiplier, properties), "SSS Multiplier");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.SSSColor, properties), "SSS Color");
+                    if (visible) materialEditor.ShaderProperty(FindProperty(UiUtils.SSSColorPower, properties), "SSS Color Power");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.SSSScale, properties), "SSS Scale");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.SSSPower, properties), "SSS Power");
+                    if (visible) materialEditor.ShaderProperty(FindProperty(UiUtils.ShadowStrength, properties), "Shadow Strength");
+                    if (visible) materialEditor.ShaderProperty(FindProperty(UiUtils.PointLightPunchthrough, properties), "Point Light Punchthrough");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.SubsurfaceDistortion, properties), "Subsurface Distortion");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.UseSSS, properties), "Use SSS");
                 });
@@ -292,6 +299,7 @@ namespace IsuzuShader.Editor
                 {
                     materialEditor.ShaderProperty(FindProperty(UiUtils.CullMode, properties), "Cull Mode");
                     materialEditor.ShaderProperty(FindProperty(UiUtils.StaticHighLights, properties), "Static High Lights");
+                    materialEditor.ShaderProperty(FindProperty(UiUtils.UseLightColor, properties), "Use Light Color");
                     materialEditor.RenderQueueField();
 #if UNITY_5_6_OR_NEWER
                     materialEditor.EnableInstancingField();

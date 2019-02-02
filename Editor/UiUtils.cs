@@ -88,6 +88,12 @@ namespace IsuzuShader.Editor
         public const string SubsurfaceDistortion = "_SubsurfaceDistortion";
         public const string MaskClipValue = "_MaskClipValue";
         public const string Opacity = "_Opacity";
+        public const string SSSType = "_SSSType";
+        public const string SSSMultiplier = "_SSSMultiplier";
+        public const string ShadowStrength = "_ShadowStrength";
+        public const string SSSColorPower = "_SSSColorPower";
+        public const string PointLightPunchthrough = "_PointLightPunchthrough";
+        public const string UseLightColor = "_UseLightColor";
 
         #endregion
 
@@ -162,7 +168,6 @@ namespace IsuzuShader.Editor
 
             if (e.type == EventType.MouseDown)
             {
-
                 if(foldRect.Contains(e.mousePosition))
                 {
                     foldField = !foldField;
