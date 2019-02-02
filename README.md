@@ -6,28 +6,34 @@
 
 アバターに適用することを目的としたトゥーンシェーダー。
 
+## ドキュメント
+
+https://github.com/isuzu-shiranui/Isuzu-s-shaders/blob/master/Documents/README_ToonShader.md
+
 ## 機能
 
 ### シェーダー
 
 * 基本的なテクスチャ表示
 * 視差マッピング
-* リム
+* リムライト
+* ノーマルマップ
 * エミッション
+* 異方性スペキュラ
+* サブサーフェススキャッタリング
 * スペキュラマップ
-* アウトライン
 * オクルージョンマップ
-* ディストーション
-* レンダーテクスチャ
+* アウトライン
 * ステンシル
 * テッセレーション
 * 両面描画
 
 ### マテリアル設定画面
 
-![](https://github.com/isuzu-shiranui/Isuzu-s-shaders/blob/master/633ad8a80923bbd656e21331f6a0ddb1.png)
+![](https://github.com/isuzu-shiranui/Isuzu-s-shaders/blob/master/Documents/Images/2019-01-31-21-44-49.png)
 
 * 本シェーダー間の値のコピー＆ペーストサポート
+* 本シェーダー間で使用できる、値のテンプレート出力機能
 * 関連する設定項目ごとに折り畳み
 
 ## License (ライセンス)
