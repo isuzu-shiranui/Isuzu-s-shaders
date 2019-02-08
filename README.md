@@ -15,6 +15,7 @@ https://github.com/isuzu-shiranui/Isuzu-s-shaders/blob/master/Documents/README_T
 ### シェーダー
 
 * 基本的なテクスチャ表示
+* UVアニメーション
 * 視差マッピング
 * リムライト
 * ノーマルマップ
