@@ -12,115 +12,120 @@ using UnityEngine;
 
 ///<inheritdoc />
 /// このクラスはShaderPropertyGeneratorにより
-/// 2/10/2019 6:43:15 AMに自動生成されました。
+/// 2019/02/19 06:59:17に自動生成されました。
 /// このファイルをエディタで直接編集しないでください。
 /// </summary>
 public class CharacterShaderCustomInspector : ShaderGUI
 {
     #region Fields
-    private string texture = "_Texture"; 
-    private string toonRamp = "_ToonRamp"; 
-    private string baseColor = "_BaseColor"; 
-    private string baseScrollRotate = "_BaseScrollRotate"; 
-    private string baseSpeedXY = "_BaseSpeedXY"; 
-    private string baseRotationPosition = "_BaseRotationPosition"; 
-    private string baseCellOffset = "_BaseCellOffset"; 
-    private string baseCellSharpness = "_BaseCellSharpness"; 
-    private string indirectDiffuseContribution = "_IndirectDiffuseContribution"; 
-    private string highlightCellOffset = "_HighlightCellOffset"; 
-    private string highlightCellSharpness = "_HighlightCellSharpness"; 
-    private string shadowContribution = "_ShadowContribution"; 
-    private string matcap = "_Matcap"; 
-    private string mid = "_Mid"; 
-    private string midColor = "_MidColor"; 
-    private string midDepthScale = "_MidDepthScale"; 
-    private string midScrollRotate = "_MidScrollRotate"; 
-    private string midSpeedXY = "_MidSpeedXY"; 
-    private string midRotationPosition = "_MidRotationPosition"; 
-    private string back = "_Back"; 
-    private string backColor = "_BackColor"; 
-    private string backDepthScale = "_BackDepthScale"; 
-    private string backScrollRotate = "_BackScrollRotate"; 
-    private string backSpeedXY = "_BackSpeedXY"; 
-    private string backRotationPosition = "_BackRotationPosition"; 
-    private string mask = "_Mask"; 
-    private string rimColor = "_RimColor"; 
-    private string rimPower = "_RimPower"; 
-    private string rimOffset = "_RimOffset"; 
-    private string useRim = "_UseRim"; 
-    private string normal = "_Normal"; 
-    private string normalScale = "_NormalScale"; 
-    private string emissionColor = "_EmissionColor"; 
-    private string emissionIntensity = "_EmissionIntensity"; 
-    private string emisionMask = "_EmisionMask"; 
-    private string specularMap = "_SpecularMap"; 
-    private string specularTint = "_SpecularTint"; 
-    private string anisotropyX = "_AnisotropyX"; 
-    private string anisotropyY = "_AnisotropyY"; 
-    private string anisotropyX2 = "_AnisotropyX2"; 
-    private string anisotropyY2 = "_AnisotropyY2"; 
-    private string layer2BlendWeight = "_Layer2BlendWeight"; 
-    private string useAnisotropic = "_UseAnisotropic"; 
-    private string occulusionMap = "_OcculusionMap"; 
-    private string occulusionStrength = "_OcculusionStrength"; 
-    private string sSSType = "_SSSType"; 
-    private string sSSMap = "_SSSMap"; 
-    private string sSSMultiplier = "_SSSMultiplier"; 
-    private string sSSColor = "_SSSColor"; 
-    private string sSSColorPower = "_SSSColorPower"; 
-    private string sSSScale = "_SSSScale"; 
-    private string sSSPower = "_SSSPower"; 
-    private string shadowStrength = "_ShadowStrength"; 
-    private string pointLightPunchthrough = "_PointLightPunchthrough"; 
-    private string subsurfaceDistortion = "_SubsurfaceDistortion"; 
-    private string useSSS = "_UseSSS"; 
-    private string maskClipValue = "_MaskClipValue"; 
-    private string opacity = "_Opacity"; 
-    private string outlineTint = "_OutlineTint"; 
-    private string outlineWidth = "_OutlineWidth"; 
-    private string tessValue = "_TessValue"; 
-    private string tessMin = "_TessMin"; 
-    private string tessMax = "_TessMax"; 
-    private string tessPhongStrength = "_TessPhongStrength"; 
-    private string renderTexture = "_RenderTexture"; 
-    private string reflectionBlend = "_ReflectionBlend"; 
-    private string reference = "_Reference"; 
-    private string readMask = "_ReadMask"; 
-    private string writeMask = "_WriteMask"; 
-    private string compFront = "_CompFront"; 
-    private string passFront = "_PassFront"; 
-    private string failFront = "_FailFront"; 
-    private string zFailFront = "_ZFailFront"; 
-    private string compBack = "_CompBack"; 
-    private string passBack = "_PassBack"; 
-    private string failBack = "_FailBack"; 
-    private string zFailBack = "_ZFailBack"; 
-    private string blendRGBSrc = "_BlendRGBSrc"; 
-    private string blendRGBDst = "_BlendRGBDst"; 
-    private string blendOpRGB = "_BlendOpRGB"; 
-    private string blendAlphaSrc = "_BlendAlphaSrc"; 
-    private string blendAlphaDst = "_BlendAlphaDst"; 
-    private string blendOpAlpha = "_BlendOpAlpha"; 
-    private string cullMode = "_CullMode"; 
-    private string useLightColor = "_UseLightColor"; 
-    private string staticHighLights = "_StaticHighLights"; 
-    private bool textureFold = false; 
-    private bool matcapFold = false; 
-    private bool midFold = false; 
-    private bool rimColorFold = false; 
-    private bool normalFold = false; 
-    private bool emissionColorFold = false; 
-    private bool specularMapFold = false; 
-    private bool anisotropyXFold = false; 
-    private bool occulusionMapFold = false; 
-    private bool sSSTypeFold = false; 
-    private bool maskClipValueFold = false; 
-    private bool outlineTintFold = false; 
-    private bool renderTextureFold = false; 
-    private bool referenceFold = false; 
-    private bool blendRGBSrcFold = false; 
-    private bool cullModeFold = false; 
-    private bool renderingFold = false;
+    private string texture                    = "_Texture"; 
+    private string toonRamp                   = "_ToonRamp"; 
+    private string baseColor                  = "_BaseColor"; 
+    private string baseScrollRotate           = "_BaseScrollRotate"; 
+    private string baseSpeedXY                = "_BaseSpeedXY"; 
+    private string baseRotationPosition       = "_BaseRotationPosition"; 
+    private string baseCellOffset             = "_BaseCellOffset"; 
+    private string baseCellSharpness          = "_BaseCellSharpness"; 
+    private string indirectDiffuseContribution= "_IndirectDiffuseContribution"; 
+    private string highlightCellOffset        = "_HighlightCellOffset"; 
+    private string highlightCellSharpness     = "_HighlightCellSharpness"; 
+    private string shadowContribution         = "_ShadowContribution"; 
+    private string matcap                     = "_Matcap"; 
+    private string mid                        = "_Mid"; 
+    private string midColor                   = "_MidColor"; 
+    private string midDepthScale              = "_MidDepthScale"; 
+    private string midScrollRotate            = "_MidScrollRotate"; 
+    private string midSpeedXY                 = "_MidSpeedXY"; 
+    private string midRotationPosition        = "_MidRotationPosition"; 
+    private string back                       = "_Back"; 
+    private string backColor                  = "_BackColor"; 
+    private string backDepthScale             = "_BackDepthScale"; 
+    private string backScrollRotate           = "_BackScrollRotate"; 
+    private string backSpeedXY                = "_BackSpeedXY"; 
+    private string backRotationPosition       = "_BackRotationPosition"; 
+    private string mask                       = "_Mask"; 
+    private string rimColor                   = "_RimColor"; 
+    private string rimPower                   = "_RimPower"; 
+    private string rimOffset                  = "_RimOffset"; 
+    private string useRim                     = "_UseRim"; 
+    private string normal                     = "_Normal"; 
+    private string normalScale                = "_NormalScale"; 
+    private string emissionColor              = "_EmissionColor"; 
+    private string emissionIntensity          = "_EmissionIntensity"; 
+    private string emisionMask                = "_EmisionMask"; 
+    private string specularMap                = "_SpecularMap"; 
+    private string specularTint               = "_SpecularTint"; 
+    private string anisotropyX                = "_AnisotropyX"; 
+    private string anisotropyY                = "_AnisotropyY"; 
+    private string anisotropyX2               = "_AnisotropyX2"; 
+    private string anisotropyY2               = "_AnisotropyY2"; 
+    private string layer2BlendWeight          = "_Layer2BlendWeight"; 
+    private string useAnisotropic             = "_UseAnisotropic"; 
+    private string occulusionMap              = "_OcculusionMap"; 
+    private string occulusionStrength         = "_OcculusionStrength"; 
+    private string sSSType                    = "_SSSType"; 
+    private string sSSMap                     = "_SSSMap"; 
+    private string sSSMultiplier              = "_SSSMultiplier"; 
+    private string sSSColor                   = "_SSSColor"; 
+    private string sSSColorPower              = "_SSSColorPower"; 
+    private string sSSScale                   = "_SSSScale"; 
+    private string sSSPower                   = "_SSSPower"; 
+    private string shadowStrength             = "_ShadowStrength"; 
+    private string pointLightPunchthrough     = "_PointLightPunchthrough"; 
+    private string subsurfaceDistortion       = "_SubsurfaceDistortion"; 
+    private string useSSS                     = "_UseSSS"; 
+    private string maskClipValue              = "_MaskClipValue"; 
+    private string opacity                    = "_Opacity"; 
+    private string outlineTint                = "_OutlineTint"; 
+    private string outlineWidth               = "_OutlineWidth"; 
+    private string tessValue                  = "_TessValue"; 
+    private string tessMin                    = "_TessMin"; 
+    private string tessMax                    = "_TessMax"; 
+    private string tessPhongStrength          = "_TessPhongStrength"; 
+    private string renderTexture              = "_RenderTexture"; 
+    private string reflectionBlend            = "_ReflectionBlend"; 
+    private string reference                  = "_Reference"; 
+    private string readMask                   = "_ReadMask"; 
+    private string writeMask                  = "_WriteMask"; 
+    private string compFront                  = "_CompFront"; 
+    private string passFront                  = "_PassFront"; 
+    private string failFront                  = "_FailFront"; 
+    private string zFailFront                 = "_ZFailFront"; 
+    private string compBack                   = "_CompBack"; 
+    private string passBack                   = "_PassBack"; 
+    private string failBack                   = "_FailBack"; 
+    private string zFailBack                  = "_ZFailBack"; 
+    private string blendRGBSrc                = "_BlendRGBSrc"; 
+    private string blendRGBDst                = "_BlendRGBDst"; 
+    private string blendOpRGB                 = "_BlendOpRGB"; 
+    private string blendAlphaSrc              = "_BlendAlphaSrc"; 
+    private string blendAlphaDst              = "_BlendAlphaDst"; 
+    private string blendOpAlpha               = "_BlendOpAlpha"; 
+    private string cullMode                   = "_CullMode"; 
+    private string useLightColor              = "_UseLightColor"; 
+    private string staticHighLights           = "_StaticHighLights"; 
+    private bool textureFold = false;
+    private bool matcapFold = false;
+    private bool midFold = false;
+    private bool rimColorFold = false;
+    private bool normalFold = false;
+    private bool emissionColorFold = false;
+    private bool specularMapFold = false;
+    private bool anisotropyXFold = false;
+    private bool occulusionMapFold = false;
+    private bool sSSTypeFold = false;
+    private bool maskClipValueFold = false;
+    private bool outlineTintFold = false;
+    private bool renderTextureFold = false;
+    private bool referenceFold = false;
+    private bool blendRGBSrcFold = false;
+    private bool cullModeFold = false;
+    private bool useRimToggle = true;
+    private bool useAnisotropicToggle = true;
+    private bool useSSSToggle = true;
+
+    private bool renderingFold        = false;
+    private bool firstInspectedEditor = true;
     #endregion
 
     public CharacterShaderCustomInspector()
@@ -169,128 +174,256 @@ public class CharacterShaderCustomInspector : ShaderGUI
             GUILayout.Space(5);
         }
 
-        EditorGUI.BeginChangeCheck();
+        var textureProp                     = FindProperty(this.texture, properties);
+        var toonRampProp                    = FindProperty(this.toonRamp, properties);
+        var baseColorProp                   = FindProperty(this.baseColor, properties);
+        var baseScrollRotateProp            = FindProperty(this.baseScrollRotate, properties);
+        var baseSpeedXYProp                 = FindProperty(this.baseSpeedXY, properties);
+        var baseRotationPositionProp        = FindProperty(this.baseRotationPosition, properties);
+        var baseCellOffsetProp              = FindProperty(this.baseCellOffset, properties);
+        var baseCellSharpnessProp           = FindProperty(this.baseCellSharpness, properties);
+        var indirectDiffuseContributionProp = FindProperty(this.indirectDiffuseContribution, properties);
+        var highlightCellOffsetProp         = FindProperty(this.highlightCellOffset, properties);
+        var highlightCellSharpnessProp      = FindProperty(this.highlightCellSharpness, properties);
+        var shadowContributionProp          = FindProperty(this.shadowContribution, properties);
+        var matcapProp                      = FindProperty(this.matcap, properties);
+        var midProp                         = FindProperty(this.mid, properties);
+        var midColorProp                    = FindProperty(this.midColor, properties);
+        var midDepthScaleProp               = FindProperty(this.midDepthScale, properties);
+        var midScrollRotateProp             = FindProperty(this.midScrollRotate, properties);
+        var midSpeedXYProp                  = FindProperty(this.midSpeedXY, properties);
+        var midRotationPositionProp         = FindProperty(this.midRotationPosition, properties);
+        var backProp                        = FindProperty(this.back, properties);
+        var backColorProp                   = FindProperty(this.backColor, properties);
+        var backDepthScaleProp              = FindProperty(this.backDepthScale, properties);
+        var backScrollRotateProp            = FindProperty(this.backScrollRotate, properties);
+        var backSpeedXYProp                 = FindProperty(this.backSpeedXY, properties);
+        var backRotationPositionProp        = FindProperty(this.backRotationPosition, properties);
+        var maskProp                        = FindProperty(this.mask, properties);
+        var rimColorProp                    = FindProperty(this.rimColor, properties);
+        var rimPowerProp                    = FindProperty(this.rimPower, properties);
+        var rimOffsetProp                   = FindProperty(this.rimOffset, properties);
+        var useRimProp                      = FindProperty(this.useRim, properties);
+        var normalProp                      = FindProperty(this.normal, properties);
+        var normalScaleProp                 = FindProperty(this.normalScale, properties);
+        var emissionColorProp               = FindProperty(this.emissionColor, properties);
+        var emissionIntensityProp           = FindProperty(this.emissionIntensity, properties);
+        var emisionMaskProp                 = FindProperty(this.emisionMask, properties);
+        var specularMapProp                 = FindProperty(this.specularMap, properties);
+        var specularTintProp                = FindProperty(this.specularTint, properties);
+        var anisotropyXProp                 = FindProperty(this.anisotropyX, properties);
+        var anisotropyYProp                 = FindProperty(this.anisotropyY, properties);
+        var anisotropyX2Prop                = FindProperty(this.anisotropyX2, properties);
+        var anisotropyY2Prop                = FindProperty(this.anisotropyY2, properties);
+        var layer2BlendWeightProp           = FindProperty(this.layer2BlendWeight, properties);
+        var useAnisotropicProp              = FindProperty(this.useAnisotropic, properties);
+        var occulusionMapProp               = FindProperty(this.occulusionMap, properties);
+        var occulusionStrengthProp          = FindProperty(this.occulusionStrength, properties);
+        var sSSTypeProp                     = FindProperty(this.sSSType, properties);
+        var sSSMapProp                      = FindProperty(this.sSSMap, properties);
+        var sSSMultiplierProp               = FindProperty(this.sSSMultiplier, properties);
+        var sSSColorProp                    = FindProperty(this.sSSColor, properties);
+        var sSSColorPowerProp               = FindProperty(this.sSSColorPower, properties);
+        var sSSScaleProp                    = FindProperty(this.sSSScale, properties);
+        var sSSPowerProp                    = FindProperty(this.sSSPower, properties);
+        var shadowStrengthProp              = FindProperty(this.shadowStrength, properties);
+        var pointLightPunchthroughProp      = FindProperty(this.pointLightPunchthrough, properties);
+        var subsurfaceDistortionProp        = FindProperty(this.subsurfaceDistortion, properties);
+        var useSSSProp                      = FindProperty(this.useSSS, properties);
+        var maskClipValueProp               = FindProperty(this.maskClipValue, properties);
+        var opacityProp                     = FindProperty(this.opacity, properties);
+        var outlineTintProp                 = FindProperty(this.outlineTint, properties);
+        var outlineWidthProp                = FindProperty(this.outlineWidth, properties);
+        var tessValueProp                   = FindProperty(this.tessValue, properties);
+        var tessMinProp                     = FindProperty(this.tessMin, properties);
+        var tessMaxProp                     = FindProperty(this.tessMax, properties);
+        var tessPhongStrengthProp           = FindProperty(this.tessPhongStrength, properties);
+        var renderTextureProp               = FindProperty(this.renderTexture, properties);
+        var reflectionBlendProp             = FindProperty(this.reflectionBlend, properties);
+        var referenceProp                   = FindProperty(this.reference, properties);
+        var readMaskProp                    = FindProperty(this.readMask, properties);
+        var writeMaskProp                   = FindProperty(this.writeMask, properties);
+        var compFrontProp                   = FindProperty(this.compFront, properties);
+        var passFrontProp                   = FindProperty(this.passFront, properties);
+        var failFrontProp                   = FindProperty(this.failFront, properties);
+        var zFailFrontProp                  = FindProperty(this.zFailFront, properties);
+        var compBackProp                    = FindProperty(this.compBack, properties);
+        var passBackProp                    = FindProperty(this.passBack, properties);
+        var failBackProp                    = FindProperty(this.failBack, properties);
+        var zFailBackProp                   = FindProperty(this.zFailBack, properties);
+        var blendRGBSrcProp                 = FindProperty(this.blendRGBSrc, properties);
+        var blendRGBDstProp                 = FindProperty(this.blendRGBDst, properties);
+        var blendOpRGBProp                  = FindProperty(this.blendOpRGB, properties);
+        var blendAlphaSrcProp               = FindProperty(this.blendAlphaSrc, properties);
+        var blendAlphaDstProp               = FindProperty(this.blendAlphaDst, properties);
+        var blendOpAlphaProp                = FindProperty(this.blendOpAlpha, properties);
+        var cullModeProp                    = FindProperty(this.cullMode, properties);
+        var useLightColorProp               = FindProperty(this.useLightColor, properties);
+        var staticHighLightsProp            = FindProperty(this.staticHighLights, properties);
 
-        materialEditor.SetDefaultGUIWidths();
+        using(var scope = new EditorGUI.ChangeCheckScope())
+        {
+            if(this.firstInspectedEditor)
+            {
+                this.useRimToggle = useRimProp.floatValue > 0;
+                this.useAnisotropicToggle = useAnisotropicProp.floatValue > 0;
+                this.useSSSToggle = useSSSProp.floatValue > 0;
+                this.firstInspectedEditor = false;
+            }
 
-        UiUtils.PropertyFoldGroup("Texture", ref this.textureFold, () => {
-            materialEditor.TexturePropertySingleLine(new GUIContent("Texture"), FindProperty(this.texture, properties)); 
-            materialEditor.TexturePropertySingleLine(new GUIContent("Toon Ramp"), FindProperty(this.toonRamp, properties)); 
-                materialEditor.ShaderProperty(FindProperty(this.baseColor, properties), "Base Color");
-                materialEditor.ShaderProperty(FindProperty(this.baseScrollRotate, properties), "Base Scroll/Rotate");
-                materialEditor.ShaderProperty(FindProperty(this.baseSpeedXY, properties), "Base Speed(X/Y)");
-                materialEditor.ShaderProperty(FindProperty(this.baseRotationPosition, properties), "Base Rotation Position");
-                materialEditor.ShaderProperty(FindProperty(this.baseCellOffset, properties), "Base Cell Offset");
-                materialEditor.ShaderProperty(FindProperty(this.baseCellSharpness, properties), "Base Cell Sharpness");
-                materialEditor.ShaderProperty(FindProperty(this.indirectDiffuseContribution, properties), "Indirect Diffuse Contribution");
-                materialEditor.ShaderProperty(FindProperty(this.highlightCellOffset, properties), "Highlight Cell Offset");
-                materialEditor.ShaderProperty(FindProperty(this.highlightCellSharpness, properties), "Highlight Cell Sharpness");
-                materialEditor.ShaderProperty(FindProperty(this.shadowContribution, properties), "Shadow Contribution");
-        });
-        UiUtils.PropertyFoldGroup("Matcap", ref this.matcapFold, () => {
-            materialEditor.TexturePropertySingleLine(new GUIContent("Matcap"), FindProperty(this.matcap, properties)); 
-        });
-        UiUtils.PropertyFoldGroup("Parallax Mapping", ref this.midFold, () => {
-            materialEditor.TexturePropertySingleLine(new GUIContent("Mid"), FindProperty(this.mid, properties)); 
-                materialEditor.ShaderProperty(FindProperty(this.midColor, properties), "Mid Color");
-                materialEditor.ShaderProperty(FindProperty(this.midDepthScale, properties), "Mid Depth Scale");
-                materialEditor.ShaderProperty(FindProperty(this.midScrollRotate, properties), "Mid Scroll/Rotate");
-                materialEditor.ShaderProperty(FindProperty(this.midSpeedXY, properties), "Mid Speed(X/Y)");
-                materialEditor.ShaderProperty(FindProperty(this.midRotationPosition, properties), "Mid Rotation Position");
-            materialEditor.TexturePropertySingleLine(new GUIContent("Back"), FindProperty(this.back, properties)); 
-                materialEditor.ShaderProperty(FindProperty(this.backColor, properties), "Back Color");
-                materialEditor.ShaderProperty(FindProperty(this.backDepthScale, properties), "Back Depth Scale");
-                materialEditor.ShaderProperty(FindProperty(this.backScrollRotate, properties), "Back Scroll/Rotate");
-                materialEditor.ShaderProperty(FindProperty(this.backSpeedXY, properties), "Back Speed(X/Y)");
-                materialEditor.ShaderProperty(FindProperty(this.backRotationPosition, properties), "Back Rotation Position");
-            materialEditor.TexturePropertySingleLine(new GUIContent("Mask"), FindProperty(this.mask, properties)); 
-        });
-        UiUtils.PropertyFoldGroup("Rim Light", ref this.rimColorFold, () => {
-                materialEditor.ShaderProperty(FindProperty(this.rimColor, properties), "Rim Color");
-                materialEditor.ShaderProperty(FindProperty(this.rimPower, properties), "Rim Power");
-                materialEditor.ShaderProperty(FindProperty(this.rimOffset, properties), "Rim Offset");
-                materialEditor.ShaderProperty(FindProperty(this.useRim, properties), "Use Rim");
-        });
-        UiUtils.PropertyFoldGroup("Normal", ref this.normalFold, () => {
-            materialEditor.TexturePropertySingleLine(new GUIContent("Normal"), FindProperty(this.normal, properties)); 
-                materialEditor.ShaderProperty(FindProperty(this.normalScale, properties), "Normal Scale");
-        });
-        UiUtils.PropertyFoldGroup("Emission", ref this.emissionColorFold, () => {
-                materialEditor.ShaderProperty(FindProperty(this.emissionColor, properties), "Emission Color");
-                materialEditor.ShaderProperty(FindProperty(this.emissionIntensity, properties), "Emission Intensity");
-            materialEditor.TexturePropertySingleLine(new GUIContent("Emision Mask"), FindProperty(this.emisionMask, properties)); 
-        });
-        UiUtils.PropertyFoldGroup("Specular", ref this.specularMapFold, () => {
-            materialEditor.TexturePropertySingleLine(new GUIContent("Specular Map"), FindProperty(this.specularMap, properties)); 
-                materialEditor.ShaderProperty(FindProperty(this.specularTint, properties), "Specular Tint");
-        });
-        UiUtils.PropertyFoldGroup("Anisotropic", ref this.anisotropyXFold, () => {
-                materialEditor.ShaderProperty(FindProperty(this.anisotropyX, properties), "Anisotropy X");
-                materialEditor.ShaderProperty(FindProperty(this.anisotropyY, properties), "Anisotropy Y");
-                materialEditor.ShaderProperty(FindProperty(this.anisotropyX2, properties), "Anisotropy X2");
-                materialEditor.ShaderProperty(FindProperty(this.anisotropyY2, properties), "Anisotropy Y2");
-                materialEditor.ShaderProperty(FindProperty(this.layer2BlendWeight, properties), "Layer2 Blend Weight");
-                materialEditor.ShaderProperty(FindProperty(this.useAnisotropic, properties), "Use Anisotropic");
-        });
-        UiUtils.PropertyFoldGroup("Occulusion", ref this.occulusionMapFold, () => {
-            materialEditor.TexturePropertySingleLine(new GUIContent("Occulusion Map"), FindProperty(this.occulusionMap, properties)); 
-                materialEditor.ShaderProperty(FindProperty(this.occulusionStrength, properties), "Occulusion Strength");
-        });
-        UiUtils.PropertyFoldGroup("Subsurface Scattering", ref this.sSSTypeFold, () => {
-                materialEditor.ShaderProperty(FindProperty(this.sSSType, properties), "SSS Type");
-            materialEditor.ShaderProperty(FindProperty(this.sSSMap, properties), "SSS Map");
-                materialEditor.ShaderProperty(FindProperty(this.sSSMultiplier, properties), "SSS Multiplier");
-                materialEditor.ShaderProperty(FindProperty(this.sSSColor, properties), "SSS Color");
-                materialEditor.ShaderProperty(FindProperty(this.sSSColorPower, properties), "SSS Color Power");
-                materialEditor.ShaderProperty(FindProperty(this.sSSScale, properties), "SSS Scale");
-                materialEditor.ShaderProperty(FindProperty(this.sSSPower, properties), "SSS Power");
-                materialEditor.ShaderProperty(FindProperty(this.shadowStrength, properties), "Shadow Strength");
-                materialEditor.ShaderProperty(FindProperty(this.pointLightPunchthrough, properties), "Point Light Punchthrough");
-                materialEditor.ShaderProperty(FindProperty(this.subsurfaceDistortion, properties), "Subsurface Distortion");
-                materialEditor.ShaderProperty(FindProperty(this.useSSS, properties), "Use SSS");
-        });
-        UiUtils.PropertyFoldGroup("Transparency", ref this.maskClipValueFold, () => {
-                materialEditor.ShaderProperty(FindProperty(this.maskClipValue, properties), "Mask Clip Value");
-                materialEditor.ShaderProperty(FindProperty(this.opacity, properties), "Opacity");
-        });
-        UiUtils.PropertyFoldGroup("Outline", ref this.outlineTintFold, () => {
-                materialEditor.ShaderProperty(FindProperty(this.outlineTint, properties), "Outline Tint");
-                materialEditor.ShaderProperty(FindProperty(this.outlineWidth, properties), "Outline Width");
-                materialEditor.ShaderProperty(FindProperty(this.tessValue, properties), "Max Tessellation");
-                materialEditor.ShaderProperty(FindProperty(this.tessMin, properties), "Tess Min Distance");
-                materialEditor.ShaderProperty(FindProperty(this.tessMax, properties), "Tess Max Distance");
-                materialEditor.ShaderProperty(FindProperty(this.tessPhongStrength, properties), "Phong Tess Strength");
-        });
-        UiUtils.PropertyFoldGroup("Render Texture", ref this.renderTextureFold, () => {
-            materialEditor.ShaderProperty(FindProperty(this.renderTexture, properties), "Render Texture");
-                materialEditor.ShaderProperty(FindProperty(this.reflectionBlend, properties), "Reflection Blend");
-        });
-        UiUtils.PropertyFoldGroup("Stencil Buffer", ref this.referenceFold, () => {
-                materialEditor.ShaderProperty(FindProperty(this.reference, properties), "Reference");
-                materialEditor.ShaderProperty(FindProperty(this.readMask, properties), "Read Mask");
-                materialEditor.ShaderProperty(FindProperty(this.writeMask, properties), "Write Mask");
-                materialEditor.ShaderProperty(FindProperty(this.compFront, properties), "Comp. Front");
-                materialEditor.ShaderProperty(FindProperty(this.passFront, properties), "Pass Front");
-                materialEditor.ShaderProperty(FindProperty(this.failFront, properties), "Fail Front");
-                materialEditor.ShaderProperty(FindProperty(this.zFailFront, properties), "ZFail Front");
-                materialEditor.ShaderProperty(FindProperty(this.compBack, properties), "Comp. Back");
-                materialEditor.ShaderProperty(FindProperty(this.passBack, properties), "Pass Back");
-                materialEditor.ShaderProperty(FindProperty(this.failBack, properties), "Fail Back");
-                materialEditor.ShaderProperty(FindProperty(this.zFailBack, properties), "ZFail Back");
-        });
-        UiUtils.PropertyFoldGroup("Blend", ref this.blendRGBSrcFold, () => {
-                materialEditor.ShaderProperty(FindProperty(this.blendRGBSrc, properties), "Blend RGB Src");
-                materialEditor.ShaderProperty(FindProperty(this.blendRGBDst, properties), "Blend RGB Dst");
-                materialEditor.ShaderProperty(FindProperty(this.blendOpRGB, properties), "Blend Op RGB");
-                materialEditor.ShaderProperty(FindProperty(this.blendAlphaSrc, properties), "Blend Alpha Src");
-                materialEditor.ShaderProperty(FindProperty(this.blendAlphaDst, properties), "Blend Alpha Dst");
-                materialEditor.ShaderProperty(FindProperty(this.blendOpAlpha, properties), "Blend Op Alpha");
-        });
-        UiUtils.PropertyFoldGroup("Rendering", ref this.cullModeFold, () => {
-                materialEditor.ShaderProperty(FindProperty(this.cullMode, properties), "Cull Mode");
-                materialEditor.ShaderProperty(FindProperty(this.useLightColor, properties), "Use Light Color");
-                materialEditor.ShaderProperty(FindProperty(this.staticHighLights, properties), "Static HighLights");
-        });
+            UiUtils.SetKeyword(useRimProp, useRimToggle);
+            UiUtils.SetKeyword(useAnisotropicProp, useAnisotropicToggle);
+            UiUtils.SetKeyword(useSSSProp, useSSSToggle);
+
+            materialEditor.SetDefaultGUIWidths();
+
+            UiUtils.PropertyFoldGroup("Texture", ref this.textureFold, () => 
+            {
+                materialEditor.TexturePropertySingleLine(new GUIContent("Texture"), textureProp); 
+                materialEditor.TexturePropertySingleLine(new GUIContent("Toon Ramp"), toonRampProp); 
+                materialEditor.ShaderProperty(baseColorProp, "Base Color");
+                materialEditor.ShaderProperty(baseScrollRotateProp, "Base Scroll/Rotate");
+                materialEditor.ShaderProperty(baseSpeedXYProp, "Base Speed(X/Y)");
+                materialEditor.ShaderProperty(baseRotationPositionProp, "Base Rotation Position");
+                materialEditor.ShaderProperty(baseCellOffsetProp, "Base Cell Offset");
+                materialEditor.ShaderProperty(baseCellSharpnessProp, "Base Cell Sharpness");
+                materialEditor.ShaderProperty(indirectDiffuseContributionProp, "Indirect Diffuse Contribution");
+                materialEditor.ShaderProperty(highlightCellOffsetProp, "Highlight Cell Offset");
+                materialEditor.ShaderProperty(highlightCellSharpnessProp, "Highlight Cell Sharpness");
+                materialEditor.ShaderProperty(shadowContributionProp, "Shadow Contribution");
+            });
+
+            UiUtils.PropertyFoldGroup("Matcap", ref this.matcapFold, () => 
+            {
+                materialEditor.TexturePropertySingleLine(new GUIContent("Matcap"), matcapProp); 
+            });
+
+            UiUtils.PropertyFoldGroup("Parallax Mapping", ref this.midFold, () => 
+            {
+                materialEditor.TexturePropertySingleLine(new GUIContent("Mid"), midProp); 
+                materialEditor.ShaderProperty(midColorProp, "Mid Color");
+                materialEditor.ShaderProperty(midDepthScaleProp, "Mid Depth Scale");
+                materialEditor.ShaderProperty(midScrollRotateProp, "Mid Scroll/Rotate");
+                materialEditor.ShaderProperty(midSpeedXYProp, "Mid Speed(X/Y)");
+                materialEditor.ShaderProperty(midRotationPositionProp, "Mid Rotation Position");
+                materialEditor.TexturePropertySingleLine(new GUIContent("Back"), backProp); 
+                materialEditor.ShaderProperty(backColorProp, "Back Color");
+                materialEditor.ShaderProperty(backDepthScaleProp, "Back Depth Scale");
+                materialEditor.ShaderProperty(backScrollRotateProp, "Back Scroll/Rotate");
+                materialEditor.ShaderProperty(backSpeedXYProp, "Back Speed(X/Y)");
+                materialEditor.ShaderProperty(backRotationPositionProp, "Back Rotation Position");
+                materialEditor.TexturePropertySingleLine(new GUIContent("Mask"), maskProp); 
+            });
+
+            UiUtils.PropertyToggleFoldGroup("Rim Light", ref this.rimColorFold, ref this.useRimToggle, () => 
+            {
+                materialEditor.ShaderProperty(rimColorProp, "Rim Color");
+                materialEditor.ShaderProperty(rimPowerProp, "Rim Power");
+                materialEditor.ShaderProperty(rimOffsetProp, "Rim Offset");
+            });
+
+            UiUtils.PropertyFoldGroup("Normal", ref this.normalFold, () => 
+            {
+                materialEditor.TexturePropertySingleLine(new GUIContent("Normal"), normalProp); 
+                materialEditor.ShaderProperty(normalScaleProp, "Normal Scale");
+            });
+
+            UiUtils.PropertyFoldGroup("Emission", ref this.emissionColorFold, () => 
+            {
+                materialEditor.ShaderProperty(emissionColorProp, "Emission Color");
+                materialEditor.ShaderProperty(emissionIntensityProp, "Emission Intensity");
+                materialEditor.TexturePropertySingleLine(new GUIContent("Emision Mask"), emisionMaskProp); 
+            });
+
+            UiUtils.PropertyFoldGroup("Specular", ref this.specularMapFold, () => 
+            {
+                materialEditor.TexturePropertySingleLine(new GUIContent("Specular Map"), specularMapProp); 
+                materialEditor.ShaderProperty(specularTintProp, "Specular Tint");
+            });
+
+            UiUtils.PropertyToggleFoldGroup("Anisotropic", ref this.anisotropyXFold, ref this.useAnisotropicToggle, () => 
+            {
+                materialEditor.ShaderProperty(anisotropyXProp, "Anisotropy X");
+                materialEditor.ShaderProperty(anisotropyYProp, "Anisotropy Y");
+                materialEditor.ShaderProperty(anisotropyX2Prop, "Anisotropy X2");
+                materialEditor.ShaderProperty(anisotropyY2Prop, "Anisotropy Y2");
+                materialEditor.ShaderProperty(layer2BlendWeightProp, "Layer2 Blend Weight");
+            });
+
+            UiUtils.PropertyFoldGroup("Occulusion", ref this.occulusionMapFold, () => 
+            {
+                materialEditor.TexturePropertySingleLine(new GUIContent("Occulusion Map"), occulusionMapProp); 
+                materialEditor.ShaderProperty(occulusionStrengthProp, "Occulusion Strength");
+            });
+
+            UiUtils.PropertyToggleFoldGroup("Subsurface Scattering (SSS)", ref this.sSSTypeFold, ref this.useSSSToggle, () => 
+            {
+                materialEditor.ShaderProperty(sSSTypeProp, "SSS Type");
+                materialEditor.ShaderProperty(sSSMapProp, "SSS Map");
+                materialEditor.ShaderProperty(sSSMultiplierProp, "SSS Multiplier");
+                materialEditor.ShaderProperty(sSSColorProp, "SSS Color");
+                materialEditor.ShaderProperty(sSSColorPowerProp, "SSS Color Power");
+                materialEditor.ShaderProperty(sSSScaleProp, "SSS Scale");
+                materialEditor.ShaderProperty(sSSPowerProp, "SSS Power");
+                materialEditor.ShaderProperty(shadowStrengthProp, "Shadow Strength");
+                materialEditor.ShaderProperty(pointLightPunchthroughProp, "Point Light Punchthrough");
+                materialEditor.ShaderProperty(subsurfaceDistortionProp, "Subsurface Distortion");
+            });
+
+            UiUtils.PropertyFoldGroup("Transparency", ref this.maskClipValueFold, () => 
+            {
+                materialEditor.ShaderProperty(maskClipValueProp, "Mask Clip Value");
+                materialEditor.ShaderProperty(opacityProp, "Opacity");
+            });
+
+            UiUtils.PropertyFoldGroup("Outline", ref this.outlineTintFold, () => 
+            {
+                materialEditor.ShaderProperty(outlineTintProp, "Outline Tint");
+                materialEditor.ShaderProperty(outlineWidthProp, "Outline Width");
+                materialEditor.ShaderProperty(tessValueProp, "Max Tessellation");
+                materialEditor.ShaderProperty(tessMinProp, "Tess Min Distance");
+                materialEditor.ShaderProperty(tessMaxProp, "Tess Max Distance");
+                materialEditor.ShaderProperty(tessPhongStrengthProp, "Phong Tess Strength");
+            });
+
+            UiUtils.PropertyFoldGroup("Render Texture", ref this.renderTextureFold, () => 
+            {
+                materialEditor.ShaderProperty(renderTextureProp, "Render Texture");
+                materialEditor.ShaderProperty(reflectionBlendProp, "Reflection Blend");
+            });
+
+            UiUtils.PropertyFoldGroup("Stencil Buffer", ref this.referenceFold, () => 
+            {
+                materialEditor.ShaderProperty(referenceProp, "Reference");
+                materialEditor.ShaderProperty(readMaskProp, "Read Mask");
+                materialEditor.ShaderProperty(writeMaskProp, "Write Mask");
+                materialEditor.ShaderProperty(compFrontProp, "Comp. Front");
+                materialEditor.ShaderProperty(passFrontProp, "Pass Front");
+                materialEditor.ShaderProperty(failFrontProp, "Fail Front");
+                materialEditor.ShaderProperty(zFailFrontProp, "ZFail Front");
+                materialEditor.ShaderProperty(compBackProp, "Comp. Back");
+                materialEditor.ShaderProperty(passBackProp, "Pass Back");
+                materialEditor.ShaderProperty(failBackProp, "Fail Back");
+                materialEditor.ShaderProperty(zFailBackProp, "ZFail Back");
+            });
+
+            UiUtils.PropertyFoldGroup("Blend", ref this.blendRGBSrcFold, () => 
+            {
+                materialEditor.ShaderProperty(blendRGBSrcProp, "Blend RGB Src");
+                materialEditor.ShaderProperty(blendRGBDstProp, "Blend RGB Dst");
+                materialEditor.ShaderProperty(blendOpRGBProp, "Blend Op RGB");
+                materialEditor.ShaderProperty(blendAlphaSrcProp, "Blend Alpha Src");
+                materialEditor.ShaderProperty(blendAlphaDstProp, "Blend Alpha Dst");
+                materialEditor.ShaderProperty(blendOpAlphaProp, "Blend Op Alpha");
+            });
+
+            UiUtils.PropertyFoldGroup("Rendering", ref this.cullModeFold, () => 
+            {
+                materialEditor.ShaderProperty(cullModeProp, "Cull Mode");
+                materialEditor.ShaderProperty(useLightColorProp, "Use Light Color");
+                materialEditor.ShaderProperty(staticHighLightsProp, "Static HighLights");
+            });
+
 
 
             UiUtils.PropertyFoldGroup("Other", ref this.renderingFold, () =>
@@ -304,9 +437,7 @@ public class CharacterShaderCustomInspector : ShaderGUI
 #endif
                 materialEditor.LightmapEmissionProperty();
             });
-
-
-        EditorGUI.EndChangeCheck();
+        }
     }
 
     private static void LoadMaterialProperties(Material material)
@@ -420,7 +551,6 @@ public class CharacterShaderCustomInspector : ShaderGUI
             }
 
             data += string.Format("{0}:{1}:{2}", name, type, value);
-
 
             if (i < propertyCount - 1) data += ";";
         }
